@@ -1,5 +1,7 @@
 # basic rpg dnd style game
-import random
+
+from enemies import *
+from attacks import *
 
 # assign character name and level
 print("Welcome to Ancient Magicks!")
@@ -118,113 +120,6 @@ def check_effective(attack_type, weakness, damage):
         damage = damage * 1.3
         print("Your weapon is highly effective against this foe")
     return damage
-# ------------ define functions for each weapon --------------
-# sword function
-def sword_attack(character_stats, weakness):
-    attack_type = "slash"
-    strength_mod = character_stats[1]
-    damage = 7 + strength_mod
-    damage = check_effective(attack_type, weakness, damage) #call effective function
-
-    hit_chance = 0.7  # 50%chance to hit
-    attack_type = "slash"
-    print("You slash with your sword...")
-
-    if random.random() <= hit_chance:
-        print("Attack landed! You dealt", damage, "damage.")
-        return damage
-    else:
-        print("Bad luck! You missed")
-        return 0
-
-
-def axe_attack(strength, weakness):
-    attack_type = "cleave"
-    damage = 10 + strength
-    damage = check_effective(attack_type, weakness, damage)  # call effective function
-
-    hit_chance = 0.8  # 30%chance to hit
-    print("You swing your axe!")
-
-    if random.random() <= hit_chance:
-        print("Attack landed! You dealt", damage, "damage.")
-        return damage
-    else:
-        print("Bad luck! You missed")
-        return 0
-
-
-def bow_attack(dexterity, weakness):
-    attack_type = "ranged"
-    damage = 10 + dexterity
-    damage = check_effective(attack_type, weakness, damage)  # call effective function
-
-    hit_chance = 0.7
-
-    if random.random() <= hit_chance:
-        print("Attack landed! You dealt", damage, "damage.")
-        return damage
-    else:
-        print("Bad luck! You missed")
-        return 0
-
-
-def staff_attack(character_stats, weakness):
-    attack_type = "magic"
-    damage = 13 + magic
-    damage = check_effective(attack_type, weakness, damage)  # call effective function
-    hit_chance = 0.5
-
-
-    if random.random() <= hit_chance:
-        print("Attack landed! You dealt", damage, "damage.")
-        return damage
-    else:
-        print("Bad luck! You missed")
-        return 0
-
-#create dictionary mapping each attack function its weapon
-
-weapon_attacks = {
-    "sword":sword_attack,
-    "axe": axe_attack,
-    "bow": bow_attack,
-    "staff": staff_attack
-}
-
-#----define goblin class and function for attack----#
-class Goblin:
-    def __init__(self):
-        self.health = 50
-        self.weakness = "cleave"
-
-    def attack(self):
-        damage = 2
-        hit_chance = 0.5
-        if random.random() <= hit_chance: #returns float between 0 - 1 and compares against hit chance
-            print("The goblin attacks you for", damage, "damage!")
-            return damage
-        else:
-            print("The goblin attacked but missed!")
-            return 0
-
-
-#define troll class and attack functions ------
-class Troll:
-    def __init__(self):
-        self.health = 50 #troll health
-        self.weakness = "cleave" #weakness to magic
-
-    def attack(self):
-        hit_chance = 0.5
-        damage = random.randint(3, 7) #random int between 3 and 7
-        if random.random() <= hit_chance:
-            print("The Troll attacks you for", damage, "damage!")
-            return damage
-        else:
-            print("The Troll attacked but missed..Phew!")
-            return 0
-
 
 
 
@@ -271,9 +166,12 @@ else:
 
     print("As you walk over the Goblins dead body you notice a shiny key.")
     print("Do you wish to take the key?")
+
 chapter_two = input()
 #while chapter_two.lower() == "yes":
 # begin chapter 2 of game
+
+
 print("You take the key and keep walking further into the dark chasm of the cave.")
 print("You arrive upon a locked door. You insert the key and slowly turn it")
 print("Your hear the sound of a mechanism turn")
